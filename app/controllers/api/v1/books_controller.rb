@@ -4,7 +4,8 @@ module Api
      before_action :set_book, only: [:show, :update, :destroy]
 
       def index
-        @books = Book.all
+        @q = Book.ransack(params[:q])
+        @books = @q.result
 
         render json: @books
       end
@@ -32,7 +33,7 @@ module Api
         end
 
         def book_params
-          params.require(:book).permit(:title, :author)
+          params.require(:book).permit(:title, :author_id)
         end
     end
   end
