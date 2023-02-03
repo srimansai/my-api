@@ -1,7 +1,10 @@
 module Api
   module V1
     class BooksController < ApplicationController
+     include ActionController::HttpAuthentication::Token
+
      before_action :set_book, only: [:show, :update, :destroy]
+     before_action :authenticate_user, only: [:create, :destroy]
      MAX_PAGTNATION_LIMIT = 100
       def index
         #@q = Book.ransack(params[:q])
@@ -32,6 +35,15 @@ module Api
       end
 
       private
+
+       def authenticate_user
+         # Authorization: Bearer <token>
+         token, _options = token_and_options(request)
+         user_id = AuthenticationTokenService.decode(token)
+         User.find(user_id)
+        rescue ActiveRecord::RecordNotFound
+          render status: :unauthorized
+        end
 
         def limit
           [

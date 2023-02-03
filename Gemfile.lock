@@ -56,6 +56,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    bcrypt (3.1.18)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -78,6 +79,7 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-wait (0.3.0)
+    jwt (2.7.0)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -198,10 +200,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
   byebug
   factory_bot_rails
   faker
+  jwt
   listen (~> 3.2)
   puma (~> 4.1)
   rack-cors
